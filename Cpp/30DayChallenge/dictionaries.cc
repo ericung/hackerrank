@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <map>
 using namespace std;
 
 
@@ -13,26 +14,29 @@ int main() {
 
     vector<string> name(N);
     vector<int> phone(N);
-    vector<string> queries(N);
+    vector<string> query(N);
+    map<string,int> entry;
 
     for (int i=0; i<N; i++) {
         cin >> name[i];
         cin >> phone[i];
+        entry[name[i]]=phone[i];
     }
 
-    for (int i=0; i<N; i++) {
-        cin >> queries[i];
+    for(int i=0; i<N; i++) {
+        cin >> query[i];
     }
 
-    for (int i=0; i<N; i++) {
-        string s;
-        for (int j=0; i<N; j++) {
-            if (name[i] == queries[j]) {
-
-            }
+    for (vector<string>::iterator it = query.begin(); it!= query.end(); ++it) {
+        if ((*it).empty()){
+            break;
         }
-        cout << queries[i] << endl;
 
+        if (entry[*it] == 0) {
+            cout << "Not found" << endl;
+        } else {
+            cout << *it << "=" << entry[*it] << endl;
+        }
     }
 
     return 0;
